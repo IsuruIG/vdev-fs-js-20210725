@@ -41,9 +41,37 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var fastify_1 = __importDefault(require("fastify"));
 var server = fastify_1.default();
-server.get('/ping', function (request, reply) { return __awaiter(void 0, void 0, void 0, function () {
+var movies = [{
+        "id": 1,
+        "name": "Inception",
+        "year": 2010,
+        "description": "A thief tries to plant an idea into the mind of a C.E.O."
+    },
+    {
+        "id": 2,
+        "name": "The Matrix",
+        "year": 1999,
+        "description": "A hacker discovers a shocking truth about his world."
+    },
+    {
+        "id": 3,
+        "name": "Donnie Darka",
+        "year": 2001,
+        "description": "A troubled teenager follows a man in a rabbit suit."
+    }];
+server.get('/', function (request, reply) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        return [2 /*return*/, 'pong\n'];
+        return [2 /*return*/, 'This is the home page.'];
+    });
+}); });
+server.get('/api/info', function (request, reply) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        return [2 /*return*/, { "version": 1, "description": "Movies server API" }];
+    });
+}); });
+server.get('/api/movies', function (request, reply) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        return [2 /*return*/, movies];
     });
 }); });
 server.listen(8080, function (err, address) {
