@@ -41,23 +41,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var fastify_1 = __importDefault(require("fastify"));
 var server = fastify_1.default();
+var apiInfo = {
+    version: 1, description: "Movies server API"
+};
+//The dataset, an array of "movies" based on the "movie" object.
 var movies = [{
-        "id": 1,
-        "name": "Inception",
-        "year": 2010,
-        "description": "A thief tries to plant an idea into the mind of a C.E.O."
+        id: 1,
+        name: "Inception",
+        year: 2010,
+        description: "A thief tries to plant an idea into the mind of a C.E.O."
     },
     {
-        "id": 2,
-        "name": "The Matrix",
-        "year": 1999,
-        "description": "A hacker discovers a shocking truth about his world."
+        id: 2,
+        name: "The Matrix",
+        year: 1999,
+        description: "A hacker discovers a shocking truth about his world."
     },
     {
-        "id": 3,
-        "name": "Donnie Darka",
-        "year": 2001,
-        "description": "A troubled teenager follows a man in a rabbit suit."
+        id: 3,
+        name: "Donnie Darka",
+        year: 2001,
+        description: "A troubled teenager follows a man in a rabbit suit."
     }];
 server.get('/', function (request, reply) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
@@ -66,12 +70,20 @@ server.get('/', function (request, reply) { return __awaiter(void 0, void 0, voi
 }); });
 server.get('/api/info', function (request, reply) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        return [2 /*return*/, { "version": 1, "description": "Movies server API" }];
+        reply
+            .code(200)
+            .header('Content-Type', 'application/json; charset=utf-8')
+            .send(apiInfo);
+        return [2 /*return*/];
     });
 }); });
 server.get('/api/movies', function (request, reply) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        return [2 /*return*/, movies];
+        reply
+            .code(200)
+            .header('Content-Type', 'application/json; charset=utf-8')
+            .send(movies);
+        return [2 /*return*/];
     });
 }); });
 server.listen(8080, function (err, address) {
